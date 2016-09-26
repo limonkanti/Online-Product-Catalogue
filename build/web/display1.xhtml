@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title>Display Products</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            
+            <p:dataGrid var="product" value="#{displayProductMB.allProduct}" columns="3" rows="10" paginator="true" id="p"
+                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink}
+                        {PageLinks} {NextPageLink} {LastPageLink}" rowsPerPageTemplate="6,12,16">
+                <f:facet name="header">
+                    <h:outputLabel value="Display All Products"></h:outputLabel>
+                </f:facet>
+                <p:panel header="#{product.proName}">
+                    <h:panelGrid columns="1">
+                        <h:graphicImage name="#{product.proUrl}" library="images" width="150" height="120"></h:graphicImage>
+                        <h:outputText value="#{product.proPrice}"></h:outputText>
+
+                    </h:panelGrid>
+
+                </p:panel>
+
+            </p:dataGrid>
+
+            <p:dialog header="Product Info" widgetVar="proDetails" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="pro" >
+                    <p:panelGrid columns="2">
+                        <f:facet name="header">
+                            <h:graphicImage name="#{displayProductMB.selectedProduct.proUrl}" library="images" width="150" height="120"></h:graphicImage>
+                        </f:facet> 
+                        
+                        <h:outputText value="#{displayProductMB.selectedProduct.proQty}"></h:outputText>
+
+                        <h:outputText value="Product Sub Category"></h:outputText>
+                        <h:outputText value="#{displayProductMB.selectedProduct.subCategory.subCatName}"></h:outputText>
+
+                        <h:outputText value="Price In BDT"></h:outputText>
+                        <h:outputText value="#{displayProductMB.selectedProduct.proPrice}"></h:outputText>
+
+                        <h:outputText value="Description"></h:outputText>
+                        <h:outputText value="#{displayProductMB.selectedProduct.proDesc}"></h:outputText>
+
+                    </p:panelGrid>
+                </p:outputPanel> 
+
+            </p:dialog>
+
+
+
+        </h:form>
+    </h:body>
+</html>
+
